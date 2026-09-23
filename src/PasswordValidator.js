@@ -78,6 +78,28 @@ class PasswordValidator {
     }
     return false
   }
+
+  /**
+   * Checks the strength of a password.
+   *
+   * @param {string} password - The password to check.
+   * @returns {string} The password strength.
+   */
+  getStrength (password) {
+    const checks = [
+      this.hasMinLength(password, 10),
+      this.hasUpperCase(password),
+      this.hasLowerCase(password),
+      this.hasNumber(password),
+      this.hasSpecialChars(password)
+    ]
+
+    const totalScore = checks.filter(check => check).length
+
+    if (totalScore <= 2) return 'weak password'
+    if (totalScore <= 4) return 'medium password'
+    return 'strong password'
+  }
 }
 
 export { PasswordValidator }

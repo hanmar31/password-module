@@ -62,6 +62,22 @@ class PasswordValidator {
     }
     return false
   }
+
+  /**
+   * Checks if the password contains a allowed special character.
+   *
+   * @param {string} password - The password to check.
+   * @returns {boolean} True if the password contains a allowed special character.
+   */
+  hasSpecialChars (password) {
+    const specialChars = '!@#£$%/\\{([)]=}<?+~^*-_.:|>'
+    for (const character of password) {
+      if (specialChars.includes(character)) {
+        return true
+      }
+    }
+    return false
+  }
 }
 
 export { PasswordValidator }

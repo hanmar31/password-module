@@ -3,6 +3,8 @@
  * @version 1.0.0
  */
 
+import { ValidationResult } from './ValidationResult'
+
 /**
  * Validates passwords based on various rules.
  */
@@ -96,9 +98,7 @@ class PasswordValidator {
 
     const totalScore = checks.filter(check => check).length
 
-    if (totalScore <= 2) return 'weak password'
-    if (totalScore <= 4) return 'medium password'
-    return 'strong password'
+    return new ValidationResult(totalScore)
   }
 }
 

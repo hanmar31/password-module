@@ -3,7 +3,7 @@
  * @version 1.0.0
  */
 
-import { ValidationResult } from './ValidationResult'
+import { ValidationResult } from './ValidationResult.js'
 
 /**
  * Validates passwords based on various rules.
@@ -21,7 +21,7 @@ class PasswordValidator {
   }
 
   /**
-   * Checks if the passsword contains a uppercase character.
+   * Checks if the password contains a uppercase character.
    *
    * @param {string} password - The password to check.
    * @returns {boolean} True if the password contains a uppercase character.
@@ -39,7 +39,7 @@ class PasswordValidator {
    * Checks if the password contains a lowercase character.
    *
    * @param {string} password - The password to check.
-   * @returns {boolean} True is the password contains a lowercase character.
+   * @returns {boolean} True if the password contains a lowercase character.
    */
   hasLowerCase (password) {
     for (const letter of password) {
@@ -54,7 +54,7 @@ class PasswordValidator {
    * Checks if the password contains a number.
    *
    * @param {string} password - The password to check.
-   * @returns {boolean} True is the password contains a number.
+   * @returns {boolean} True if the password contains a number.
    */
   hasNumber (password) {
     for (const character of password) {
@@ -66,10 +66,10 @@ class PasswordValidator {
   }
 
   /**
-   * Checks if the password contains a allowed special character.
+   * Checks if the password contains an allowed special character.
    *
    * @param {string} password - The password to check.
-   * @returns {boolean} True if the password contains a allowed special character.
+   * @returns {boolean} True if the password contains an allowed special character.
    */
   hasSpecialChars (password) {
     const specialChars = '!@#£$%/\\{([)]=}<?+~^*-_.:|>'
@@ -85,7 +85,7 @@ class PasswordValidator {
    * Checks the strength of a password.
    *
    * @param {string} password - The password to check.
-   * @returns {string} The password strength.
+   * @returns {ValidationResult} The password strength.
    */
   getStrength (password) {
     const checks = [
@@ -97,8 +97,25 @@ class PasswordValidator {
     ]
 
     const totalScore = checks.filter(check => check).length
+    const suggestions = this.getSuggestions(password)
 
-    return new ValidationResult(totalScore)
+    return new ValidationResult(totalScore, suggestions)
+  }
+
+  /**
+   * Returns suggestions for how to improve the password.
+   *
+   * @param {string} password - The password to check.
+   * @returns {string[]} Suggestions for improving the password.
+   */
+  getSuggestions (password) {
+    const suggestions = []
+    if (!this.hasMinLength(password, 10)) suggestions.push('Use at least 10 characters.')
+    if (!this.hasUpperCase(password)) suggestions.push('Add at least one uppercase letter')
+    if (!this.hasLowerCase(password)) suggestions.push('Add at least one lowercase letter')
+    if (!this.hasNumber(password)) suggestions.push('Add at least one number')
+    if (!this.hasSpecialChars(password)) suggestions.push('Add at least one special character')
+    return suggestions
   }
 }
 

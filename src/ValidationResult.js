@@ -8,7 +8,7 @@
  */
 class ValidationResult {
   /**
-   *Creates a new validation result.
+   * Creates a new validation result.
    *
    * @param {number} score - The password score.
    * @param {string[]} suggestions - Suggestions for improving the password.

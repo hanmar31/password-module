@@ -32,6 +32,21 @@ class PasswordValidator {
     }
     return false
   }
+
+  /**
+   * Checks if the password contains a lowercase character.
+   *
+   * @param {string} password - the password to check.
+   * @returns {boolean} True is the password contains a lowercase character.
+   */
+  hasLowerCase (password) {
+    for (const letter of password) {
+      if (letter === letter.toLowerCase() && letter !== letter.toUpperCase()) {
+        return true
+      }
+    }
+    return false
+  }
 }
 
 export { PasswordValidator }

@@ -30,7 +30,7 @@ class PasswordGenerator {
 
     const allChar = upperChar + lowerChar + numberChar + specialChar
 
-    for (let i = 0; i <= actualLength - 4; i++) {
+    for (let i = 0; i < actualLength - 4; i++) {
       password.push(this.getRandomChar(allChar))
     }
 

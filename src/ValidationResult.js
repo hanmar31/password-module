@@ -28,6 +28,15 @@ class ValidationResult {
     if (this.score <= 4) return 'medium password'
     return 'strong password'
   }
+
+  /**
+   * Checks if there are any suggestions for improving the password.
+   *
+   * @returns {boolean} True if there are suggestions, otherwise false.
+   */
+  hasSuggestions () {
+    return this.suggestions.length > 0
+  }
 }
 
 export { ValidationResult }

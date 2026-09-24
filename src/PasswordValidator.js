@@ -82,6 +82,16 @@ class PasswordValidator {
   }
 
   /**
+   * Checks if the password contains spaces.
+   *
+   * @param {string} password - The password to check.
+   * @returns {boolean} False if password contains at least one space, otherwise true.
+   */
+  hasNoSpaces (password) {
+    return !password.includes(' ')
+  }
+
+  /**
    * Checks the strength of a password.
    *
    * @param {string} password - The password to check.
@@ -116,6 +126,21 @@ class PasswordValidator {
     if (!this.hasNumber(password)) suggestions.push('Add at least one number')
     if (!this.hasSpecialChars(password)) suggestions.push('Add at least one special character')
     return suggestions
+  }
+
+  /**
+   * Checks if the password meets all validation requirements.
+   *
+   * @param {string} password - The password to check.
+   * @returns {boolean} True if the password meets all requirements.
+   */
+  isValidPassword (password) {
+    return this.hasMinLength(password, 10) &&
+      this.hasUpperCase(password) &&
+      this.hasLowerCase(password) &&
+      this.hasNumber(password) &&
+      this.hasSpecialChars(password) &&
+      this.hasNoSpaces(password)
   }
 }
 

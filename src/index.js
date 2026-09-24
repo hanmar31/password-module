@@ -5,5 +5,6 @@
 
 import { PasswordValidator } from './PasswordValidator.js'
 import { ValidationResult } from './ValidationResult.js'
+import { PasswordGenerator } from './PasswordGenerator.js'
 
-export { PasswordValidator, ValidationResult }
+export { PasswordValidator, ValidationResult, PasswordGenerator }

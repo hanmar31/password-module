@@ -4,6 +4,7 @@
  */
 
 import { ValidationResult } from './ValidationResult.js'
+import { PasswordGenerator } from './PasswordGenerator.js'
 
 /**
  * Validates passwords based on various rules.
@@ -120,11 +121,13 @@ class PasswordValidator {
    */
   getSuggestions (password) {
     const suggestions = []
+    if (password.length === 0) return ['Password cannot be empty']
     if (!this.hasMinLength(password, 10)) suggestions.push('Use at least 10 characters.')
     if (!this.hasUpperCase(password)) suggestions.push('Add at least one uppercase letter')
     if (!this.hasLowerCase(password)) suggestions.push('Add at least one lowercase letter')
     if (!this.hasNumber(password)) suggestions.push('Add at least one number')
     if (!this.hasSpecialChars(password)) suggestions.push('Add at least one special character')
+    if (!this.hasNoSpaces(password)) suggestions.push('Remove spaces from the password')
     return suggestions
   }
 
@@ -141,6 +144,14 @@ class PasswordValidator {
       this.hasNumber(password) &&
       this.hasSpecialChars(password) &&
       this.hasNoSpaces(password)
+  }
+
+  /**
+   *
+   * @param password
+   */
+  isGeneratedPasswordValid (password) {
+    return this.isValidPassword(new PasswordGenerator(password))
   }
 }
 

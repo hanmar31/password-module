@@ -3,6 +3,8 @@
  * @version 1.0.0
  */
 
+import { PasswordValidator } from './PasswordValidator.js'
+
 /**
  * Generates passwords that meet requirements.
  */
@@ -48,6 +50,17 @@ class PasswordGenerator {
   getRandomChar (charPool) {
     const randomIndex = Math.floor(Math.random() * charPool.length)
     return charPool[randomIndex]
+  }
+
+  /**
+   * Validates that a generated password meets all requirements.
+   *
+   * @param {string} password - The password to validate.
+   * @returns {boolean} True is the password meets all requirments.
+   */
+  isGeneratedPasswordValid (password) {
+    const validator = new PasswordValidator()
+    return validator.isValidPassword(password)
   }
 }
 

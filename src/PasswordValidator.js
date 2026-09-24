@@ -4,7 +4,6 @@
  */
 
 import { ValidationResult } from './ValidationResult.js'
-import { PasswordGenerator } from './PasswordGenerator.js'
 
 /**
  * Validates passwords based on various rules.
@@ -15,9 +14,10 @@ class PasswordValidator {
    *
    * @param {string} password - The password to check.
    * @param {number} minLength - The minimum required password length.
-   * @returns {boolean} True if password meets required minimum length. otherwise false.
+   * @returns {boolean} True if password meets required minimum length, otherwise false.
    */
   hasMinLength (password, minLength) {
+    this.#validateInput(password)
     return password.length >= minLength
   }
 
@@ -28,6 +28,7 @@ class PasswordValidator {
    * @returns {boolean} True if the password contains a uppercase character.
    */
   hasUpperCase (password) {
+    this.#validateInput(password)
     for (const letter of password) {
       if (letter === letter.toUpperCase() && letter !== letter.toLowerCase()) {
         return true
@@ -43,6 +44,7 @@ class PasswordValidator {
    * @returns {boolean} True if the password contains a lowercase character.
    */
   hasLowerCase (password) {
+    this.#validateInput(password)
     for (const letter of password) {
       if (letter === letter.toLowerCase() && letter !== letter.toUpperCase()) {
         return true
@@ -58,6 +60,7 @@ class PasswordValidator {
    * @returns {boolean} True if the password contains a number.
    */
   hasNumber (password) {
+    this.#validateInput(password)
     for (const character of password) {
       if (character >= '0' && character <= '9') {
         return true
@@ -73,6 +76,7 @@ class PasswordValidator {
    * @returns {boolean} True if the password contains an allowed special character.
    */
   hasSpecialChars (password) {
+    this.#validateInput(password)
     const specialChars = '!@#£$%/\\{([)]=}<?+~^*-_.:|>'
     for (const character of password) {
       if (specialChars.includes(character)) {
@@ -89,6 +93,7 @@ class PasswordValidator {
    * @returns {boolean} False if password contains at least one space, otherwise true.
    */
   hasNoSpaces (password) {
+    this.#validateInput(password)
     return !password.includes(' ')
   }
 
@@ -99,6 +104,7 @@ class PasswordValidator {
    * @returns {ValidationResult} The password strength.
    */
   getStrength (password) {
+    this.#validateInput(password)
     const checks = [
       this.hasMinLength(password, 10),
       this.hasUpperCase(password),
@@ -120,8 +126,8 @@ class PasswordValidator {
    * @returns {string[]} Suggestions for improving the password.
    */
   getSuggestions (password) {
+    this.#validateInput(password)
     const suggestions = []
-    if (password.length === 0) return ['Password cannot be empty']
     if (!this.hasMinLength(password, 10)) suggestions.push('Use at least 10 characters.')
     if (!this.hasUpperCase(password)) suggestions.push('Add at least one uppercase letter')
     if (!this.hasLowerCase(password)) suggestions.push('Add at least one lowercase letter')
@@ -138,6 +144,7 @@ class PasswordValidator {
    * @returns {boolean} True if the password meets all requirements.
    */
   isValidPassword (password) {
+    this.#validateInput(password)
     return this.hasMinLength(password, 10) &&
       this.hasUpperCase(password) &&
       this.hasLowerCase(password) &&
@@ -147,11 +154,21 @@ class PasswordValidator {
   }
 
   /**
+   * Validates the password input.
    *
-   * @param password
+   * @param {string} password - The password to validate.
+   * @throws {Error} If the password is null, undefined, not a string, or empty.
    */
-  isGeneratedPasswordValid (password) {
-    return this.isValidPassword(new PasswordGenerator(password))
+  #validateInput (password) {
+    if (password === null || password === undefined) {
+      throw new Error('Password cannot be null or undefined')
+    }
+    if (typeof password !== 'string') {
+      throw new Error('Password must be a string')
+    }
+    if (password.length === 0) {
+      throw new Error('Password cannot be empty')
+    }
   }
 }
 

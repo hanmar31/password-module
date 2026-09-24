@@ -4,7 +4,7 @@
  */
 
 /**
- *
+ * Generates passwords that meet requirements.
  */
 class PasswordGenerator {
   /**
@@ -20,6 +20,7 @@ class PasswordGenerator {
     const specialChar = '!@#£$%/\\{([)]=}<?+~^*-_.:|>'
 
     const password = []
+    const actualLength = Math.max(length, 10)
 
     const requiredPools = [upperChar, lowerChar, numberChar, specialChar]
 
@@ -27,11 +28,9 @@ class PasswordGenerator {
       password.push(this.getRandomChar(pool))
     }
 
-    const actualLength = Math.max(length, 10)
-
     const allChar = upperChar + lowerChar + numberChar + specialChar
 
-    for (let i = 1; i <= actualLength - 4; i++) {
+    for (let i = 0; i <= actualLength - 4; i++) {
       password.push(this.getRandomChar(allChar))
     }
 

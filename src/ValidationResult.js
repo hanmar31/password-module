@@ -37,6 +37,15 @@ class ValidationResult {
   hasSuggestions () {
     return this.suggestions.length > 0
   }
+
+  /**
+   * Returns the password strength score.
+   *
+   * @returns {number} The password strength score between 0 and 5.
+   */
+  getScore () {
+    return this.score
+  }
 }
 
 export { ValidationResult }

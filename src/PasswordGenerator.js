@@ -16,6 +16,7 @@ class PasswordGenerator {
    * @returns {string} The generated password.
    */
   generate (length) {
+    this.#validateLength(length)
     const upperChar = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     const lowerChar = 'abcdefghijklmnopqrstuvwxyz'
     const numberChar = '1234567890'
@@ -56,11 +57,29 @@ class PasswordGenerator {
    * Validates that a generated password meets all requirements.
    *
    * @param {string} password - The password to validate.
-   * @returns {boolean} True is the password meets all requirments.
+   * @returns {boolean} True if the password meets all requirements.
    */
   isGeneratedPasswordValid (password) {
     const validator = new PasswordValidator()
     return validator.isValidPassword(password)
+  }
+
+  /**
+   * Validates the password length.
+   *
+   * @param {number} length - The length to validate.
+   * @throws {Error} If length is null, undefined, mot a number, or negative.
+   */
+  #validateLength (length) {
+    if (length == null) {
+      throw new Error('Length cannot be null or undefined')
+    }
+    if (typeof length !== 'number') {
+      throw new Error('Length must be a number')
+    }
+    if (length < 0) {
+      throw new Error('Length cannot be negative')
+    }
   }
 }
 

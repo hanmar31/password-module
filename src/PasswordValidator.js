@@ -10,7 +10,7 @@ import { ValidationResult } from './ValidationResult.js'
  */
 class PasswordValidator {
   /**
-   * Checks the password agains the minimum length required.
+   * Checks the password against the minimum length required.
    *
    * @param {string} password - The password to check.
    * @param {number} minLength - The minimum required password length.

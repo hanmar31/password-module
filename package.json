@@ -1,7 +1,7 @@
 {
   "name": "password-module",
   "version": "1.0.0",
-  "description": "",
+  "description": "A password validation and generation moudle.",
   "homepage": "https://github.com/hanmar31/password-module#readme",
   "bugs": {
     "url": "https://github.com/hanmar31/password-module/issues"
@@ -15,8 +15,8 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/greeting.js",
+    "test": "node test-app/app.js",
+    "start": "node test-app/app.js",
     "lint": "npx eslint ./src",
     "lint:fix": "npx eslint ./src --fix"
   },

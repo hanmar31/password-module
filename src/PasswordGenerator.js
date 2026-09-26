@@ -68,7 +68,7 @@ class PasswordGenerator {
    * Validates the password length.
    *
    * @param {number} length - The length to validate.
-   * @throws {Error} If length is null, undefined, mot a number, or negative.
+   * @throws {Error} If length is null, undefined, not a number, or negative.
    */
   #validateLength (length) {
     if (length == null) {

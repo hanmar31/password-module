@@ -17,7 +17,7 @@ Answer: The module is tested in the console by an automated test app. The tests 
 |PasswordValidator.hasMinLength() - password with exactly 10 characters.                   |Called hasMinLength('mypassword', 10) in the test app and compared the result with the expected value "true".                    |✅ Passed.         |
 |PasswordValidator.hasMinLength - password with less than 10 characters.                   | Called hasMinLength('short', 10) in the test app and compared the result with the expected value "false".                    |✅ Passed.        |
 |PasswordValidator.hasUpperCase() - password including a uppercase character.                   |Called hasUpperCase('myPassword') in the test app and compared the result with the expected value "true".                    |✅ Passed.         |
-|PasswordValidator.hasUpperCase() - password without any uppercase character.                   |called hasUpperCase('mypassword') in test app and compared the result with the expected value "false".                    |✅ Passed.         |
+|PasswordValidator.hasUpperCase() - password without any uppercase character.                   |Called hasUpperCase('mypassword') in test app and compared the result with the expected value "false".                    |✅ Passed.         |
 |PasswordValidator.hasLowerCase() - password including a lowercase character.                   |Called hasLowerCase('myPassword') in the test app and compared the result with the expected value "true".                    |✅ Passed.         |
 |PasswordValidator.hasLowerCase() - password without any lowercase characters.                   |Called hasLowerCase('MYPASSWORD') in the test app and compared the result with the expected value "false"                    |✅ Passed.          |
 |PasswordValidator.hasNumber() - password including a number.                   |Called hasNumber('mypassword123') in the test app and compared the result with the expected value "true".                    |✅ Passed.          |
@@ -39,4 +39,3 @@ Answer: The module is tested in the console by an automated test app. The tests 
 | PasswordGenerator.isGeneratedPasswordValid() — invalid password fails validation | Called isGeneratedPasswordValid('weak') in the test app and compared the result to expected value false | ✅ Passed.|
 | PasswordValidator — throws error when null is passed | Called hasMinLength(null, 10) inside a try/catch in the test app and verified an error was thrown with the correct message | ✅ Passed. |
 | PasswordGenerator.generate() — throws error when null is passed as length | Called generate(null) inside a try/catch in the test app and verified an error was thrown with the correct message | ✅ Passed. |
-

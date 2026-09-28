@@ -1,3 +1,5 @@
+# Password module
+
 ## About
 A JavaScript module for password validation and generation. It helps developers verify that passwords meet security criteria and generate passwords that automatically fulfill those same criteria. The module consists of three classes: `PasswordGenerator`, `PasswordValidator`, and `ValidationResult`.
 

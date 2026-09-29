@@ -34,7 +34,7 @@ import { PasswordValidator } from './path/to/password-module/src/index.js'
 
 const validator = new PasswordValidator()
 
-// Check is a password is valid
+// Check if a password is valid
 console.log(validator.isValidPassword('myPassword123!')) // true
 
 // Get the strength of a password

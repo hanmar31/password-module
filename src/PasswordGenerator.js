@@ -37,9 +37,18 @@ class PasswordGenerator {
       password.push(this.getRandomChar(allCharacters))
     }
 
-    password.sort(() => Math.random() - 0.5)
+    this.#shuffleGeneratedCharacters(password)
 
     return password.join('')
+  }
+
+  /**
+   * Shuffles the generated password characters, and changes the array order.
+   *
+   * @param {string[]} generatedCharacters - The characters to shuffle.
+   */
+  #shuffleGeneratedCharacters (generatedCharacters) {
+    generatedCharacters.sort(() => Math.random() - 0.5)
   }
 
   /**

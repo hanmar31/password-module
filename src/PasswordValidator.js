@@ -77,9 +77,9 @@ class PasswordValidator {
    */
   hasSpecialChars (password) {
     this.#validateInput(password)
-    const specialChars = '!@#£$%/\\{([)]=}<?+~^*-_.:|>'
+    const specialCharacters = '!@#£$%/\\{([)]=}<?+~^*-_.:|>'
     for (const character of password) {
-      if (specialChars.includes(character)) {
+      if (specialCharacters.includes(character)) {
         return true
       }
     }

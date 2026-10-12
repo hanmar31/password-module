@@ -9,6 +9,11 @@ import { PasswordValidator } from './PasswordValidator.js'
  * Generates passwords that meet requirements.
  */
 class PasswordGenerator {
+  #upperCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  #lowerCharacters = 'abcdefghijklmnopqrstuvwxyz'
+  #numberCharacters = '1234567890'
+  #specialCharacters = '!@#£$%/\\{([)]=}<?+~^*-_.:|>'
+
   /**
    * Generates a password.
    *
@@ -17,21 +22,13 @@ class PasswordGenerator {
    */
   generate (length) {
     this.#validateLength(length)
-    const upperCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    const lowerCharacters = 'abcdefghijklmnopqrstuvwxyz'
-    const numberCharacters = '1234567890'
-    const specialCharacters = '!@#£$%/\\{([)]=}<?+~^*-_.:|>'
 
     const password = []
     const actualLength = Math.max(length, 10)
 
-    const requiredPools = [upperCharacters, lowerCharacters, numberCharacters, specialCharacters]
+    this.#addRequiredCharacters(password)
 
-    for (const pool of requiredPools) {
-      password.push(this.getRandomChar(pool))
-    }
-
-    const allCharacters = upperCharacters + lowerCharacters + numberCharacters + specialCharacters
+    const allCharacters = this.#upperCharacters + this.#lowerCharacters + this.#numberCharacters + this.#specialCharacters
 
     for (let i = 0; i < actualLength - 4; i++) {
       password.push(this.getRandomChar(allCharacters))
@@ -40,6 +37,19 @@ class PasswordGenerator {
     this.#shuffleGeneratedCharacters(password)
 
     return password.join('')
+  }
+
+  /**
+   * Ensures the password contains at least one character from each required category, changing the array.
+   *
+   * @param {string[]} generatedCharacters - The characters collected so far.
+   */
+  #addRequiredCharacters (generatedCharacters) {
+    const requiredPools = [this.#upperCharacters, this.#lowerCharacters, this.#numberCharacters, this.#specialCharacters]
+
+    for (const pool of requiredPools) {
+      generatedCharacters.push(this.getRandomChar(pool))
+    }
   }
 
   /**

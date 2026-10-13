@@ -57,7 +57,7 @@ class PasswordGenerator {
   #addRandomCharacters (generatedCharacters, passwordLength) {
     const allCharacters = this.#upperCharacters + this.#lowerCharacters + this.#numberCharacters + this.#specialCharacters
 
-    for (let i = 0; i < passwordLength - 4; i++) {
+    while (generatedCharacters.length <= passwordLength) {
       generatedCharacters.push(this.getRandomChar(allCharacters))
     }
   }

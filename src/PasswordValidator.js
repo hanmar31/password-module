@@ -12,6 +12,15 @@ class PasswordValidator {
   #minimumPasswordLength = 10
 
   /**
+   * Gets the minimum length a password must have to be valid.
+   *
+   * @returns {number} The minimum password length.
+   */
+  getMinimumPasswordLength () {
+    return this.#minimumPasswordLength
+  }
+
+  /**
    * Checks the password against the minimum length required.
    *
    * @param {string} password - The password to check.

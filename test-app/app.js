@@ -127,6 +127,12 @@ console.log(test22 === true ? '✅ PASS' : '❌ FAIL', 'Expected: true, Got:', t
 const test23 = generator.isGeneratedPasswordValid('weak')
 console.log(test23 === false ? '✅ PASS' : '❌ FAIL', 'Expected: false, Got:', test23)
 
+console.log('--- Testing getMinimumPasswordLength ---')
+
+// Test that getMinimumPasswordLength returns 10.
+const test24 = validator.getMinimumPasswordLength()
+console.log(test24 === 10 ? '✅ PASS' : '❌ FAIL', 'Expected: 10, Got:', test24)
+
 console.log('--- Testing error handling ---')
 
 // Test that passing null throws an error

@@ -28,11 +28,7 @@ class PasswordGenerator {
 
     this.#addRequiredCharacters(password)
 
-    const allCharacters = this.#upperCharacters + this.#lowerCharacters + this.#numberCharacters + this.#specialCharacters
-
-    for (let i = 0; i < actualLength - 4; i++) {
-      password.push(this.getRandomChar(allCharacters))
-    }
+    this.#addRandomCharacters(password, actualLength)
 
     this.#shuffleGeneratedCharacters(password)
 
@@ -49,6 +45,20 @@ class PasswordGenerator {
 
     for (const pool of requiredPools) {
       generatedCharacters.push(this.getRandomChar(pool))
+    }
+  }
+
+  /**
+   * Adds random characters to the password array until the desired length is reached.
+   *
+   * @param {string[]} generatedCharacters - The characters collected so far.
+   * @param {number} passwordLength - The desired password length.
+   */
+  #addRandomCharacters (generatedCharacters, passwordLength) {
+    const allCharacters = this.#upperCharacters + this.#lowerCharacters + this.#numberCharacters + this.#specialCharacters
+
+    for (let i = 0; i < passwordLength - 4; i++) {
+      generatedCharacters.push(this.getRandomChar(allCharacters))
     }
   }
 

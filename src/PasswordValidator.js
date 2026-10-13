@@ -9,6 +9,8 @@ import { ValidationResult } from './ValidationResult.js'
  * Validates passwords based on various rules.
  */
 class PasswordValidator {
+  #minimumPasswordLength = 10
+
   /**
    * Checks the password against the minimum length required.
    *
@@ -106,7 +108,7 @@ class PasswordValidator {
   getStrength (password) {
     this.#validateInput(password)
     const checks = [
-      this.hasMinLength(password, 10),
+      this.hasMinLength(password, this.#minimumPasswordLength),
       this.hasUpperCase(password),
       this.hasLowerCase(password),
       this.hasNumber(password),
@@ -128,7 +130,7 @@ class PasswordValidator {
   getSuggestions (password) {
     this.#validateInput(password)
     const suggestions = []
-    if (!this.hasMinLength(password, 10)) suggestions.push('Use at least 10 characters.')
+    if (!this.hasMinLength(password, this.#minimumPasswordLength)) suggestions.push(`Use at least ${this.#minimumPasswordLength} characters.`)
     if (!this.hasUpperCase(password)) suggestions.push('Add at least one uppercase letter')
     if (!this.hasLowerCase(password)) suggestions.push('Add at least one lowercase letter')
     if (!this.hasNumber(password)) suggestions.push('Add at least one number')
@@ -145,7 +147,7 @@ class PasswordValidator {
    */
   isValidPassword (password) {
     this.#validateInput(password)
-    return this.hasMinLength(password, 10) &&
+    return this.hasMinLength(password, this.#minimumPasswordLength) &&
       this.hasUpperCase(password) &&
       this.hasLowerCase(password) &&
       this.hasNumber(password) &&

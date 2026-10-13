@@ -87,7 +87,7 @@ class PasswordGenerator {
    * Validates the password length.
    *
    * @param {number} length - The length to validate.
-   * @throws {Error} If length is null, undefined, not a number, or negative.
+   * @throws {Error} If length is null, undefined, not a number, negative, or not finite.
    */
   #validateLength (length) {
     if (length == null) {
@@ -98,6 +98,9 @@ class PasswordGenerator {
     }
     if (length < 0) {
       throw new Error('Length cannot be negative')
+    }
+    if (!Number.isFinite(length)) {
+      throw new Error('Length must be a finite number')
     }
   }
 }

@@ -144,3 +144,19 @@ try {
 } catch (error) {
   console.log('✅ PASS Error thrown correctly:', error.message)
 }
+
+// Try that passing NaN throws as length throws an error.
+try {
+  generator.generate(NaN)
+  console.log('❌ FAIL Expected an error to be thrown')
+} catch (error) {
+  console.log('✅ PASS Error thrown correctly:', error.message)
+}
+
+// Try that passing Infinity as length throws an error.
+try {
+  generator.generate(Infinity)
+  console.log('❌ FAIL Expected an error to be thrown')
+} catch (error) {
+  console.log('✅ PASS Error thrown correctly:', error.message)
+}

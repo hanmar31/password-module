@@ -13,6 +13,7 @@ class PasswordGenerator {
   #lowerCharacters = 'abcdefghijklmnopqrstuvwxyz'
   #numberCharacters = '1234567890'
   #specialCharacters = '!@#£$%/\\{([)]=}<?+~^*-_.:|>'
+  #validator = new PasswordValidator()
 
   /**
    * Generates a password.
@@ -24,7 +25,7 @@ class PasswordGenerator {
     this.#validateLength(length)
 
     const password = []
-    const actualLength = Math.max(length, 10)
+    const actualLength = Math.max(length, this.#validator.getMinimumPasswordLength())
 
     this.#addRequiredCharacters(password)
 
@@ -57,7 +58,7 @@ class PasswordGenerator {
   #addRandomCharacters (generatedCharacters, passwordLength) {
     const allCharacters = this.#upperCharacters + this.#lowerCharacters + this.#numberCharacters + this.#specialCharacters
 
-    while (generatedCharacters.length <= passwordLength) {
+    while (generatedCharacters.length < passwordLength) {
       generatedCharacters.push(this.getRandomChar(allCharacters))
     }
   }
@@ -89,8 +90,7 @@ class PasswordGenerator {
    * @returns {boolean} True if the password meets all requirements.
    */
   isGeneratedPasswordValid (password) {
-    const validator = new PasswordValidator()
-    return validator.isValidPassword(password)
+    return this.#validator.isValidPassword(password)
   }
 
   /**
